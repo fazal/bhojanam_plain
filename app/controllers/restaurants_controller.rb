@@ -18,7 +18,15 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
   end
   def edit
+    @restaurant = Restaurant.find(params[:id])
   end
   def update
+    @restaurant = Restaurant.find(params[:id])
+    if(@restaurant.update_attributes(params[:restaurant]))
+      flash[:notice] = "Restaurant updated successfully"
+      redirect_to @restaurant
+    else
+       render :action=>:edit
+    end
   end
 end
